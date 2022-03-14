@@ -1,0 +1,12 @@
+from django.urls import path,include
+from . import views
+from django.contrib.auth.views import LoginView
+
+
+urlpatterns = [
+    path("", views.home),
+    path("log_in/",views.reg_sign_in, name = 'signin_name'),
+    path("reg_home/<int:pk>", views.reg_home, name="reg_home_name"),
+    path("sorry_page/", views.sorry, name="sorry_name"),
+
+]

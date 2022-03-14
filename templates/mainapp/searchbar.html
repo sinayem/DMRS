@@ -1,0 +1,22 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="container py-5">
+<form>
+ <input type="button" value="Go back!" onclick="history.back()">
+</form>
+{% csrf_token %}
+{%if single_person%}
+    {% for p in single_person %}
+    {% comment %} {%if p.name == ''%}
+    Not Found
+    {%endif%} {% endcomment %}
+    <li>Name:{{ p.name }}</li>
+    <li>Nid:{{ p.nid }}</li>
+    <li>Marital status:{{ p.status }}</li>
+    {% endfor %}
+{%else%}
+    <li>Not valid nid</li>
+{%endif%}
+{{single_person.name}}
+</div>
+{% endblock %}

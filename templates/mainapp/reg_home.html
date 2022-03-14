@@ -1,0 +1,116 @@
+{% extends "base.html" %} 
+{% block content %}
+<h2>Welcome {{user.username}}</h3>
+
+<div class="row container">
+ {% comment %}
+<div class="row col-md-5 row">
+	<div class="">
+		<div class="card card-body">
+    
+		<tr>
+                <th width="200">
+                     Search Marriage Registration Info
+                </th>
+            </tr>
+
+            <tr>
+                <form action="{% url 'reg_home_name' %}" method="GET">{% csrf_token %}
+                <input name="q" type="text" placeholder="Registration No">
+                <input type="submit" value="Search">
+                
+                </form>
+            </tr>
+            
+            <tr>
+        {%if sp%}
+            {% for p in sp %}
+            <li>Name: {{ p.name }}</li>
+            <li>Nid: {{ p.nid }}</li>
+            <li>Marital status: {{ p.status }}</li>
+             {% endfor %}
+        {%else%}
+            <li>Not valid nid</li>
+        {%endif%}
+        </tr>
+
+        
+            
+             <tr>
+        {%if sp0 %}
+            {% for p in sp0 %}
+            {% comment %} {%if p.name == ''%}
+            Not Found
+            {%endif%} 
+            <li>Name: {{ p.name }}</li>
+            <li>Nid: {{ p.nid }}</li>
+            <li>Marital status: {{ p.status }}</li>
+        
+            {% endfor %}
+        {%else%}
+            <li>Not valid nid</li>
+        {%endif%}
+        
+            </tr> 
+
+            <tr>
+                <th width="200">
+                    <input type="number" step = "any" name="marks1" placeholder="Marks" required>
+                </th>
+            </tr>
+
+
+
+            <tr>
+                <th colspan="2">
+                    <button type="submit">Save</button>
+                </th>
+            </tr>
+			{% comment %} <form method="get">
+
+
+		    <button class="btn btn-primary" type="submit">Please Insert your Details Information</button>
+		  </form> 
+		</div>
+	</div>
+	
+</div>{% endcomment %}
+<div class="col-md-12 row ">
+
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'reg_marriage'%}">Marriage Registration</a>
+			<table class="table table-sm">
+				<tr>
+					
+					<th>Marriage Id</th>
+					<th>Nid of groom</th>
+					<th>Nid of bride</th>
+					<th>Details</th>
+					<th>Certificate</th>
+	
+				</tr>
+
+					{% for reg in data %}
+						<tr>
+							<td>{{ reg.registration_num }}</td>
+				
+							<td>{{ reg.groom_nid_id }}</td>
+                   
+							<td>{{ reg.bride_nid_id }}</td>
+							
+							<td><a class="btn btn-sm btn-primary" href="{% url 'detail' reg.registration_num %}">See Details</a></td>
+                            <td><a href="{% url 'pdf' reg.registration_num %}" class="btn btn-sm btn-primary">Download</a></td>
+						</tr>
+					{% endfor %}
+				
+					
+
+				
+				
+		
+
+			</table>
+		</div>
+	</div>
+    </div>
+{% endblock %} 

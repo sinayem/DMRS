@@ -1,0 +1,21 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import Register,Reg_marriage
+
+# class RegisterForm(UserCreationForm):
+#     nid = forms.IntegerField(required=True)
+#     class Meta:
+# 	    model = User
+# 	    fields = ("username", "nid", "password1", "password2")
+#     def save(self, commit=True):
+# 	    user = super(RegisterForm, self).save(commit=False)
+# 	    user.nid = self.cleaned_data['nid']
+# 	    if commit:
+# 		    user.save()
+# 	    return user
+
+class Reg_marriage_Form(forms.ModelForm):
+    class Meta:
+        model = Reg_marriage
+        exclude = ("reg",)

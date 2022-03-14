@@ -1,0 +1,59 @@
+from django.http import request
+from django.shortcuts import render
+
+from django.shortcuts import render, redirect,get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm 
+from .forms import RegisterForm, Reg_marriage_Form
+from django.contrib.auth import authenticate, login
+
+from django.contrib.auth.models import User
+from .models import *
+from .forms import *
+from django.db.models import Sum, Count, Case, When
+from django.contrib import messages
+def home(request):
+    return render(request, "base.html")
+@login_required(login_url='/login/')
+def reg_home(request):
+	
+	return render(request, "mainapp/reg_home.html",)
+
+
+
+@login_required(login_url='/login/')
+def reg_mar(request):
+    forms = Reg_marriage_Form()
+    if request.method == "POST":
+        data = Reg_marriage_Form(request.POST)
+        if data.is_valid():
+            data.save()
+        return redirect("/reg_home/")
+    return render(request, "mainapp/reg_marriage.html", {"forms": forms})
+
+
+def sorry(request):
+    return render(request, "mainapp/sorry.html")
+
+
+
+
+
+
+def reg_sign_in(request):
+    if request.method == "POST":
+	    form = AuthenticationForm(request, data=request.POST)
+	    if form.is_valid():
+		    username = form.cleaned_data.get('username')
+		    password = form.cleaned_data.get('password')
+		    user = authenticate(username=username, password=password)
+		    if user is not None:
+			    login(request, user)
+			    messages.info(request, f"You are now logged in as {username}.")
+			    return redirect(reg_home)
+		    else:
+			    messages.error(request, messages.INFO,"Invalid username or password.")
+	    else:
+		    messages.error(request,"Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request,"mainapp/login.html",{"login_form":form})

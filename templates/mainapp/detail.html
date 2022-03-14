@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+{% block content %}
+</tr>
+
+    <tr>
+        <h3><i>Registration Id: </i><b>{{ mar_id.registration_num }} <b></h3>
+        
+        <h3><i>Groom Nid: </i><b>{{ mar_id.groom_nid_id }}</b></h3>
+       
+        <h3><i>Groom Name: </i><b>{{ mar_id.groom_name }}</b></h3>
+     
+        <h3><i>Bride Nid: </i><b>{{ mar_id.bride_nid_id }}</b></h3>
+        
+        <h3><i>Bride Name: </i><b>{{ mar_id.bride_name }}</b></h3>
+        
+        <h3><i>Date and Time: </i><b>{{ mar_id.marriage_date }}</b></h3>
+        
+        <h3><i>Fee: </i><b>{{ mar_id.marriage_fee }}</b></h3>
+        
+</tr>
+{% endblock %} 

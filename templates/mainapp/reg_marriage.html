@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+{% load crispy_forms_tags %} 
+{% block content %}
+<div class="container py-5">
+{% comment %} <form>
+ <input type="button" value="Go back!" onclick="history.back()">
+</form>
+<form action="{% url 'searchbar' %}" method="GET">{% csrf_token %}
+  <input name="q" type="text" placeholder="Search with nid">
+  <input type="submit" value="Search">
+</form> {% endcomment %}
+
+<form action="" method="POST">
+{% csrf_token %}
+{{ forms|crispy }}
+<input type='submit' name='submit'>
+</form>
+</div>
+{% endblock %}
